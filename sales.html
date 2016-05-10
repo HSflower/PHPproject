@@ -1,0 +1,248 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Sales Force Automation</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="./dist/css/bootstrap.css" rel="stylesheet">-
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="../../assets/js/html5shiv.js"></script>
+      <script src="../../assets/js/respond.min.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />    
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+    <!--jquery.ui.datepicker 한글팩 -->
+    <script type="text/javascript" src="js/jquery.ui.datepicker-ko.js"></script>
+
+    <style>
+        /*body {font-size:9pt}*/
+        /*img {vertical-align:middle}*/
+        #txtDate { margin:2px 2px; height:15px; width:75px;vertical-align:center}
+    </style>
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand active" href="./home.html">SFA</a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="./write.html">새로만들기</a></li>
+            <li><a href="./current.html">견적·업체현황</a></li>
+            <li><a href="./cs.html">CS</a></li>
+            <li><a href="./sales.html">영업활동관리</a></li>
+            <li><a href="./statistics_sales.html">영업통계</a></li>
+            <li><a href="#contact">운영통계</a></li>
+            <!-- drop down button -->
+          </ul>
+          <form class="navbar-form navbar-right">
+            <div class="form-group">
+              <input type="text" placeholder="Email" class="form-control">
+            </div>
+            <div class="form-group">
+              <input type="password" placeholder="Password" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-success">Log in</button>
+          </form>
+        </div><!--/.navbar-collapse -->
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="page-header">
+          <ul class="nav nav-pills nav-justified">
+            <li><a href="#salesdiary" data-toggle="tab">영업일지</a></li>
+            <li><a href="#currentsales" data-toggle="tab">영업현황</a></li>
+            <li><a href="#salesreport" data-toggle="tab">수치보고서</a></li>
+          </ul>
+      </div>
+    </div>
+
+    <div id="myTabContent" class="tab-content">
+      <div id="salesdiary" class="container tab-pane fade in active">
+          <form role="form">
+            <div class="form-group">
+              <label for="businessNameInput">상호명</label>
+              <input type="text" class="form-control" id="businessNameInput" placeholder="Enter businessName">
+            </div>
+            <div class="form-group">
+              <label for="salesDateInput">영업일자&nbsp;</label>
+               <input type="date"id="salesDateInput"> <br/>
+            </div>
+            <div class="form-group">
+              <label for="representInput">담당자</label>
+              <input type="text" class="form-control" id="representInput" placeholder="Enter address">
+            </div>
+            <div class="form-group">
+              <label for="positionInput">직급</label>
+              <input type="text" class="form-control" id="positionInput" placeholder="">
+            </div>
+            <div class="form-group">
+              <label for="phonenumberInput">전화번호</label>
+              <input type="text" class="form-control" id="phonenumberInput" placeholder="01020565236">
+            </div>            
+          </form> 
+          <form role="form">
+            <div class="form-inline form-group">
+              <label>진행상황</label>
+              <select class="form-control">
+                <option>컨택</option>
+                <option>미팅</option>
+              </select>
+              <label>&nbsp;&nbsp;차수</label>
+              <select class="form-control">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+              </select>
+              <label for="possiblility">&nbsp;&nbsp;진행가능성</label>
+              <input type="text" class="form-control" id="possibility" placeholder="">%
+            </div>
+          </form>
+          <div class="form-group">
+              <label for="noteInput">내용</label>
+              <textarea class="form-control" id="noteInput" rows="3"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+
+      <div class="container tab-pane fade" id="currentsales">
+        <!-- 담당PM <div class="show">...</div>, if power=admin -->
+        <div id="currentsales">
+          <form class="form-inline form-group" role="form">
+            <select class="form-control">
+                <option>컨택</option>
+                <option>미팅</option>
+              </select>
+            <div class="form-group">
+              <label for="startdateInput">검색&nbsp;</label>
+               <input type="date"id="startdateInput"> <br/>
+            </div>
+            <div class="form-group">
+              <label for="endDateInput">~&nbsp;</label>
+               <input type="date"id="endDateInput"> <br/>
+            </div>
+          </form>
+          <div class="table-responsive">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>번호</th>
+                  <th>영업일자</th>
+                  <th>담당PM</th>
+                  <th>상호명</th>
+                  <th>담당자</th>
+                  <th>직급</th>
+                  <th>컨택</th>
+                  <th>미팅</th>
+                  <th>진행상황</th>
+                  <th>진행가능성</th>
+                  <th>내용</th>
+                </tr>
+              </thead>
+              <tr>
+                <td>1</td>
+                <td>2015-04-01</td>
+                <td>김한슬</td> <!-- default : today -->
+                <td><a class="btn btn-link" href="#" role="button">하이노베이션</a></td>
+                <td>누구</td>
+                <td>매니저</td>
+                <td>5</td>
+                <td>1</td>
+                <td>미팅</td>
+                <td>50%</td>
+                <td>별로임</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="container tab-pane fade" id="salesreport">
+        <div id="sales">
+          <form class="form-inline form-group" role="form">
+            <label for="pmName"></label>
+            <select class="form-control" id="pmName">
+                <option>영업PM</option>
+                <option>김한슬</option>
+              </select>
+            <div class="form-group">
+              <label for="startdateInput">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;검색&nbsp;</label>
+               <input type="date"id="startdateInput"> <br/>
+            </div>
+            <div class="form-group">
+              <label for="endDateInput">~&nbsp;</label>
+               <input type="date"id="endDateInput"> <br/>
+            </div>
+          </form>
+          <div class="table-responsive">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>번호</th>
+                  <th>영업일자</th>
+                  <th>담당PM</th>
+                  <th>컨택수</th>
+                  <th>미팅수</th>
+                  <th>계약수</th>
+                  <th>내용</th>
+                </tr>
+              </thead>
+              <tr>
+                <td>1</td>
+                <td>2015-04-01</td>
+                <td>김한슬</td> <!-- default : today -->
+                <td>5</td>
+                <td>1</td>
+                <td>0</td>
+                <td>별로임</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="container tab-pane fade" id="deliveryprocessing">
+          <div class="form-group">
+              <label for="deliveryExcelInputFile">파일 업로드</label>
+              <input type="file" id="deliveryExcelInputFile">
+              <p class="help-block">수발주의 배송처리 DB와 연동되면 참 좋을텐데...</p>
+            </div>
+      </div>
+    </div>
+
+    <div id="footer">
+      <div class="container">
+        <p>Back to <a href="../sticky-footer">the default sticky footer</a> minus the navbar.</p>
+        <p class="text-muted credit">Example courtesy <a href="http://martinbean.co.uk">Martin Bean</a> and <a href="http://ryanfait.com/sticky-footer/">Ryan Fait</a>.</p>
+      </div>
+    </div>
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="./js/jquery.js"></script>
+    <script src="./dist/js/bootstrap.min.js"></script>
+    <script src="./js/respond.js"></script>
+  </body>
+</html>

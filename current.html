@@ -1,0 +1,263 @@
+<?
+session_start();
+?>
+<? include $_SERVER["DOCUMENT_ROOT"] . "/classes/Users.php" ?>
+<? 
+  $obj          = new Users($_REQUEST, "");
+  $quotaList     = $obj->getQuotaList(); 
+  //$companyList    = $obj->getCompanyInfo();
+  $vnum = 1;
+  $userNumber = 0;
+?>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Sales Force Automation</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="./dist/css/bootstrap.css" rel="stylesheet">-
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="../../assets/js/html5shiv.js"></script>
+      <script src="../../assets/js/respond.min.js"></script>
+    <![endif]-->
+    <script >
+      function log_in(){
+          form = document.login_form;
+          if(form.user_id.value==""){
+            alert("Please input your id");
+            form.user_id.focus();
+            return false;
+          } else if(form.user_pw.value==""){
+            alert("Please input your pw");
+            return false;
+          } else {
+            return true;
+          }
+        }
+    </script>
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand active" href="./home.html">SFA</a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="./write.html">새로만들기</a></li>
+            <li><a href="./current.html">견적·업체현황</a></li>
+            <li><a href="./cs.html">CS</a></li>
+            <li><a href="./sales.html">영업활동관리</a></li>
+            <li><a href="./statistics_sales.html">영업통계</a></li>
+            <li><a href="#contact">운영통계</a></li>
+            <!-- drop down button -->
+          </ul>
+          <? //if($_SESSION['my_session']!="ok"){  ?>
+          <? if(!isset($_SESSION['user_id']) || !isset($_SESSION['user_name'])){ ?>
+          <form class="navbar-form navbar-right" name="login_form" method="post" action="login_ok.php" onSubmit="return log_in();" id="form1">
+            <div class="form-group">
+              <input type="text" placeholder="Email" class="form-control" name="user_id" tabindex='1'/>
+            </div>
+            <div class="form-group">
+              <input type="password" placeholder="Password" class="form-control" name="user_pw" tabindex='2'/>
+            </div>
+            <button type="submit" class="btn btn-success">Log in</button>
+          </form>
+          <? } else { 
+            $user_id = $_SESSION['user_id'];
+            $user_name = $_SESSION['user_name'];
+          ?>
+           <form class="navbar-form navbar-right" name="login_form" method="post" action="logout.php" >
+            <label style="color:whitesmoke;"><?=$user_name?>님이 로그인함</label>
+            <button type="submit" class="btn btn-success">Log out</button>
+          </form>
+          <? } ?>
+        </div><!--/.navbar-collapse -->
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="page-header">
+          <ul class="nav nav-pills nav-justified">
+            <li><a href="#currentquota" data-toggle="tab">견적현황</a></li>
+            <li><a href="#currentcompany" data-toggle="tab">업체현황</a></li>
+          </ul>
+      </div>
+    </div>
+
+    <div id="myTabContent" class="tab-content">
+      <div id="currentquota" class="container tab-pane fade in active">
+        <div class="dropdown-header">
+          <h1>견적요청현황 <small>영업</small></h1>
+        </div>
+        <div class="table-responsive">
+          <?
+
+          ?>
+          <table class="table table-hover">
+            <tr>
+              <th>번호</th>
+              <th>등록일자</th>
+              <th>업체명</th>
+              <th>진행상황</th>
+              <th>
+                <select class="form-control">
+                  <option>운영PM</option> <!-- default=0 : all -->
+                  <option>정수진</option>
+                  <option>정은진</option>
+                </select>
+              </th>
+              <th>
+                <select class="form-control">
+                  <option>영업PM</option> <!-- default=0 : all -->
+                  <option>김성권</option>
+                  <option>김현석</option>
+                  <option>김현호</option>
+                  <option>박상준</option>
+                  <option>유성근</option>
+                  <option>장동훈</option>
+                  <option>홍수민</option>
+                </select>
+              </th>
+              <th>업체등록</th>
+              <th>수정</th>
+            </tr>
+            <? for($i=0;$i<sizeof($quotaList);$i++){ ?>
+            <tr>
+              <td><?=$vnum?></td>
+              <td><?=$quotaList[$i]["registDT"]?></td>
+              <td><a class="btn btn-link" href="#companydetail" role="button"><?=$quotaList[$i]["cName"]?></a></td>
+              <td>
+                <div class="progress">
+                  <div class="progress-bar progress-bar-success" style="width: 20%;">
+                    <span class="sr-only">20% Complete (success)</span>
+                  </div>
+                  <div class="progress-bar progress-bar-warning" style="width: 20%;  display: none;">
+                    <span class="sr-only">40% Complete (warning)</span>
+                  </div>
+                  <div class="progress-bar progress-bar-danger" style="width: 20%;  display: none;">
+                    <span class="sr-only">60% Complete (warning)</span>
+                  </div>
+                  <div class="progress-bar" style="width: 20%;  display: none;">
+                    <span class="sr-only">80% Complete (danger)</span>
+                  </div>
+                  <div class="progress-bar progress-bar-info" style="width: 20%;  display: none;">
+                    <span class="sr-only">100% Complete (danger)</span>
+                  </div>
+                </div>
+              </td>
+              <td>운영PM</td>
+              <td><?=$userNumber?></td>
+              <td><input class="btn btn-primary" type="submit" value="register"></td>
+              <td><button type="button" class="btn btn-info">수정</button></td>
+            </tr>
+            <? $vnum++; } ?>
+          </table>
+        </div>
+        <? include $_SERVER["DOCUMENT_ROOT"] . "/classes/php/pageNavigation.php" ?>
+        <ul class="pagination">
+            <li><a href="#">«</a></li>
+            <li><a href="#">1</a></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">4</a></li>
+            <li><a href="#">5</a></li>
+            <li><a href="#">»</a></li>
+        </ul>
+      </div>
+
+      <div class="container tab-pane fade" id="currentcompany">
+        <div class="dropdown-header">
+            <h1>업체등록현황 <small>영업</small></h1>
+        </div> 
+        <div class="table-responsive">
+          <table class="table table-hover">
+            <tr>
+              <th>번호</th>
+              <th>등록일자</th>
+              <th>업체명</th>
+              <th>진행상황</th>
+              <th>
+                <select class="form-control">
+                  <option>운영PM</option> <!-- default=0 : all -->
+                  <option>정수진</option>
+                  <option>정은진</option>
+                </select>
+              </th>
+              <th>
+                <select class="form-control">
+                  <option>영업PM</option> <!-- default=0 : all -->
+                  <option>김성권</option>
+                  <option>김현석</option>
+                  <option>김현호</option>
+                  <option>박상준</option>
+                  <option>유성근</option>
+                  <option>장동훈</option>
+                  <option>홍수민</option>
+                </select>
+              </th>
+              <th>수정</th>
+            </tr>
+            <tr>
+              <td>no</td>
+              <td>등록일자</td>
+              <td><a class="btn btn-link" href="#write" role="button">업체명</a></td>
+              <td>
+                <label class="checkbox-inline">
+                  <input type="checkbox" id="inlineCheckbox1" value="option1">
+                </label>
+                <label class="checkbox-inline">
+                  <input type="checkbox" id="inlineCheckbox2" value="option2">
+                </label>
+                <label class="checkbox-inline">
+                  <input type="checkbox" id="inlineCheckbox3" value="option3">
+                </label>
+                <label class="checkbox-inline">
+                  <input type="checkbox" id="inlineCheckbox4" value="option4">
+                </label>
+                <label class="checkbox-inline">
+                  <input type="checkbox" id="inlineCheckbox5" value="option5">
+                </label>
+              </td>
+              <td>운영PM</td>
+              <td>영업PM</td>
+              <td><button type="button" class="btn btn-info">수정</button></td>
+            </tr>
+          </table>
+        </div>
+        <!-- jump to write page --> 
+        <div class="container tab-pane fade" id="currentcompany">
+        </div>
+      </div>
+    </div>
+
+    <div id="footer">
+      <div class="container">
+        <p>Back to <a href="../sticky-footer">the default sticky footer</a> minus the navbar.</p>
+        <p class="text-muted credit">Example courtesy <a href="http://martinbean.co.uk">Martin Bean</a> and <a href="http://ryanfait.com/sticky-footer/">Ryan Fait</a>.</p>
+      </div>
+    </div>
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="./js/jquery.js"></script>
+    <script src="./dist/js/bootstrap.min.js"></script>
+    <script src="./js/respond.js"></script>
+  </body>
+</html>

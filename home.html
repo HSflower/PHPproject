@@ -1,0 +1,257 @@
+<?
+//session_name("user");
+//session_set_cookie_params(0, '/', 'buyrunicm.cafe24.com');
+  session_start();
+  /*
+  if(!isset($_SESSION['is_login'])){
+    header('Location: ./login.php');
+  $user_name = 0;
+  }
+  */
+?>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Sales Force Automation</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="./dist/css/bootstrap.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="../../assets/js/html5shiv.js"></script>
+      <script src="../../assets/js/respond.min.js"></script>
+    <![endif]-->
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script text="javascript">
+
+           function log_in(){
+          form = document.login_form;
+          if(form.user_id.value==""){
+            alert("Please input your id");
+            form.user_id.focus();
+            return false;
+          } else if(form.user_pw.value==""){
+            alert("Please input your pw");
+            return false;
+          } else {
+            return true;
+          }
+        }
+    </script>
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand active" href="./home.html">SFA</a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="./write.html">새로만들기</a></li>
+            <li><a href="./current.html">견적·업체현황</a></li>
+            <li><a href="./cs.html">CS</a></li>
+            <li><a href="./sales.html">영업활동관리</a></li>
+            <li><a href="./statistics_sales.html">영업통계</a></li>
+            <li><a href="#">운영통계</a></li>
+            <!-- drop down button -->
+          </ul>
+
+          <? //if($_SESSION['my_session']!="ok"){  ?>
+          <? if(!isset($_SESSION['user_id']) || !isset($_SESSION['user_name'])){ ?>
+          <form class="navbar-form navbar-right" name="login_form" method="post" action="login.php" onSubmit="return log_in();" id="form1">
+            <div class="form-group">
+              <input type="text" placeholder="Email" class="form-control" name="user_id" tabindex='1'/>
+            </div>
+            <div class="form-group">
+              <input type="password" placeholder="Password" class="form-control" name="user_pw" tabindex='2'/>
+            </div>
+            <button type="submit" class="btn btn-success">Log in</button>
+          </form>
+          <? } else { 
+            $user_id = $_SESSION['user_id'];
+            $user_name = $_SESSION['user_name'];
+          ?>
+           <form class="navbar-form navbar-right" name="login_form" method="post" action="logout.php" >
+            <label style="color:whitesmoke;"><?=$user_id?>님이 로그인함</label>
+            <button type="submit" class="btn btn-success">Log out</button>
+          </form>
+          <? } ?>
+
+          <div class="navbar-form navbar-right" id="message"></div>
+        </div><!--/.navbar-collapse -->
+      </div>
+    </div>
+
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron">
+      <div class="container">
+        <div>
+          <br />
+            <a class="btn btn-primary btn-lg" href="./write.html#quotarequest">견적요청 &raquo;</a>
+            <!-- bookmark shortcut ? -->
+            <a class="btn btn-primary btn-lg" href="./sales.html">영업일지 작성 &raquo;</a>
+            <a class="btn btn-primary btn-lg" href="#">CS작성 &raquo;</a>
+            <a align="right">&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;4월</a>
+        </div>
+        <div class="col-lg-5" align="right">
+          <br />
+          <table class="table">
+            <tr>
+              <th></th>
+              <th>현황</th>
+              <th>목표</th>
+              <th>달성률</th>
+            </tr>
+            <tr>
+              <td>신청서</td>
+              <td>값</td>
+              <td>목표값</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>발주</td>
+              <td>110</td>
+              <td>목표값</td>
+              <td>100</td>
+            </tr>
+            <tr>
+              <td>발주금액</td>
+              <td>값</td>
+              <td>목표값</td>
+              <td></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <!-- Example row of columns -->
+      <div class="row">
+        <div class="col-lg-4">
+          <h2>현황</h2>
+
+            <div class="page-header">
+                <ul class="nav nav-pills nav-justified">
+                  <li><a href="#quotasum" data-toggle="tab">견적현황</a></li>
+                  <li><a href="#companysum" data-toggle="tab">업체현황</a></li>
+                </ul>
+            </div>
+
+          <div id="quotasum" class="table-responsive">
+            <table class="table table-hover">
+              <tr>
+                <th>일자</th>
+                <th>업체명</th>
+                <th>진행상황</th>
+                <th>운영</th>
+                <th>영업</th>
+              </tr>
+              <tr>
+                <td>일자</td>
+                <td><a class="btn btn-link" href="#companydetail" role="button">업체명</a></td>
+                <td>
+                  <div class="progress">
+                    <div class="progress-bar progress-bar-success" style="width: 20%">
+                      <span class="sr-only">20% Complete (success)</span>
+                    </div>
+                    <div class="progress-bar progress-bar-warning" style="width: 20%">
+                      <span class="sr-only">40% Complete (warning)</span>
+                    </div>
+                    <div class="progress-bar progress-bar-danger" style="width: 20%">
+                      <span class="sr-only">60% Complete (warning)</span>
+                    </div>
+                    <div class="progress-bar" style="width: 20%">
+                      <span class="sr-only">80% Complete (danger)</span>
+                    </div>
+                    <div class="progress-bar progress-bar-info" style="width: 20%">
+                      <span class="sr-only">100% Complete (danger)</span>
+                    </div>
+                  </div>
+                </td>
+                <td>운영PM</td>
+                <td>영업PM</td>
+              </tr>
+            </table>
+          </div>
+
+          <div id="companysum" class="table-responsive">
+            <table class="table table-hover">
+              <tr>
+                <th>일자</th>
+                <th>업체명</th>
+                <th>진행상황</th>
+                <th>운영</th>
+                <th>영업</th>
+              </tr>
+              <tr>
+                <td>일자</td>
+                <td><a class="btn btn-link" href="#companydetail" role="button">업체명</a></td>
+                <td>
+                  <div class="progress">
+                    <div class="progress-bar progress-bar-success" style="width: 20%">
+                      <span class="sr-only">20% Complete (success)</span>
+                    </div>
+                    <div class="progress-bar progress-bar-warning" style="width: 20%">
+                      <span class="sr-only">40% Complete (warning)</span>
+                    </div>
+                    <div class="progress-bar progress-bar-danger" style="width: 20%">
+                      <span class="sr-only">60% Complete (warning)</span>
+                    </div>
+                    <div class="progress-bar" style="width: 20%">
+                      <span class="sr-only">80% Complete (danger)</span>
+                    </div>
+                    <div class="progress-bar progress-bar-info" style="width: 20%">
+                      <span class="sr-only">100% Complete (danger)</span>
+                    </div>
+                  </div>
+                </td>
+                <td>운영PM</td>
+                <td>영업PM</td>
+              </tr>
+            </table>
+          </div>
+
+          <p><a class="btn btn-default" href="./write.html#quotarequest">View details &raquo;</a></p>
+        </div>
+
+        <div class="col-lg-4">
+          <h2>Sales statistics</h2>
+          <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+          <p><a class="btn btn-default" href="#">View details &raquo;</a></p>
+        </div>
+        <div class="col-lg-4">
+          <h2>Operation</h2>
+          <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+          <p><a class="btn btn-default" href="#">View details &raquo;</a></p>
+        </div>
+      </div>
+    </div>
+
+      <hr>
+
+      <footer>
+        <p>&copy; Company 2013</p>
+      </footer>
+    </div> <!-- /container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="./js/jquery.js"></script>
+    <script src="./dist/js/bootstrap.min.js"></script>
+  </body>
+</html>

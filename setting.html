@@ -1,0 +1,99 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Sales Force Automation</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="./dist/css/bootstrap.css" rel="stylesheet">-
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="../../assets/js/html5shiv.js"></script>
+      <script src="../../assets/js/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand active" href="#">SFA</a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="#">새로만들기</a></li>
+            <li><a href="#about">견적·업체현황</a></li>
+            <li><a href="#contact">CS</a></li>
+            <li><a href="#contact">영업활동관리</a></li>
+            <li><a href="#contact">영업통계</a></li>
+            <li><a href="#contact">운영통계</a></li>
+            <!-- drop down button -->
+          </ul>
+          <form class="navbar-form navbar-right">
+            <div class="form-group">
+              <input type="text" placeholder="Email" class="form-control">
+            </div>
+            <div class="form-group">
+              <input type="password" placeholder="Password" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-success">Log in</button>
+          </form>
+        </div><!--/.navbar-collapse -->
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="page-header">
+          <ul class="nav nav-pills nav-justified">
+            <li><a href="#currentCS" data-toggle="tab">영업활동</a></li>
+            <li><a href="#writeCS" data-toggle="tab">영업관리</a></li>
+          </ul>
+      </div>
+    </div>
+
+    <div id="myTabContent" class="tab-content">
+      <div id="currentCS" class="container tab-pane fade in active">
+        <div class="dropdown-header">
+          <h1>영업현황 <small>영업관리</small></h1>
+        </div>
+      </div>
+
+      <div id="writeCS" class="container tab-pane fade in active">
+        <div class="dropdown-header">
+          <h1>CS작성 <small>운영</small></h1>
+        </div>
+        <div class="">
+          
+        </div>
+        
+      </div>
+    </div>
+
+    <div id="footer">
+      <div class="container">
+        <p>Back to <a href="../sticky-footer">the default sticky footer</a> minus the navbar.</p>
+        <p class="text-muted credit">Example courtesy <a href="http://martinbean.co.uk">Martin Bean</a> and <a href="http://ryanfait.com/sticky-footer/">Ryan Fait</a>.</p>
+      </div>
+    </div>
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="./js/jquery.js"></script>
+    <script src="./dist/js/bootstrap.min.js"></script>
+    <script src="./js/respond.js"></script>
+  </body>
+</html>

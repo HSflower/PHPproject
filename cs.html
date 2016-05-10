@@ -1,0 +1,194 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Sales Force Automation</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="./dist/css/bootstrap.css" rel="stylesheet">-
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="../../assets/js/html5shiv.js"></script>
+      <script src="../../assets/js/respond.min.js"></script>
+    <![endif]-->
+      <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />    
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+    <!--jquery.ui.datepicker 한글팩 -->
+    <script type="text/javascript" src="js/jquery.ui.datepicker-ko.js"></script>
+
+    <style>
+        /*body {font-size:9pt}*/
+        /*img {vertical-align:middle}*/
+        #txtDate { margin:2px 2px; height:15px; width:75px;vertical-align:center}
+    </style>
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand active" href="./home.html">SFA</a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="./write.html">새로만들기</a></li>
+            <li><a href="./current.html">견적·업체현황</a></li>
+            <li><a href="./cs.html">CS</a></li>
+            <li><a href="./sales.html">영업활동관리</a></li>
+            <li><a href="./statistics_sales.html">영업통계</a></li>
+            <li><a href="#contact">운영통계</a></li>
+            <!-- drop down button -->
+          </ul>
+          <form class="navbar-form navbar-right">
+            <div class="form-group">
+              <input type="text" placeholder="Email" class="form-control">
+            </div>
+            <div class="form-group">
+              <input type="password" placeholder="Password" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-success">Log in</button>
+          </form>
+        </div><!--/.navbar-collapse -->
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="page-header">
+          <ul class="nav nav-pills nav-justified">
+            <li><a href="#currentCS" data-toggle="tab">CS현황</a></li>
+            <li><a href="#writeCS" data-toggle="tab">CS작성</a></li>
+          </ul>
+      </div>
+    </div>
+
+    <div id="myTabContent" class="tab-content">
+      <div id="currentCS" class="container tab-pane fade in active">
+        <div class="dropdown-header">
+          <h1>CS현황 <small>운영</small></h1>
+        </div>
+        <div class="table-responsive">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>번호</th>
+                <th>발생일자</th>
+                <th>중분류</th>
+                <th>소분류</th>
+                <th>업체명</th>
+                <th>발생상황</th>
+                <th>응대내용</th>
+                <th>처리현황</th>
+                <th>비고</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>번호</td>
+                <td>발생일자</td>
+                <td>중분류</td>
+                <td>소분류</td>
+                <td><a class="btn btn-link" href="#write" role="button">업체명</a></td>
+                <td>발생상황</td>
+                <td>응대내용</td>
+                <td></td>
+                <td><a class="btn btn-link" href="#write" role="button">상세</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <ul class="pagination">
+            <li><a href="#">«</a></li>
+            <li><a href="#">1</a></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">4</a></li>
+            <li><a href="#">5</a></li>
+            <li><a href="#">»</a></li>
+        </ul>
+      </div>
+
+      <div id="writeCS" class="container tab-pane fade in active">
+        <div class="dropdown-header">
+          <h1>CS작성 <small>운영</small><br/><br/></h1>
+        </div>
+        <div class="">
+          <form class="form-inline form-group" role="form">
+            <div class="form-group">
+               <label for="occuredDateInput">발생일자</label>
+               <input type="date"id="occuredDateInput"><br/>
+            </div>
+            <div class="form-group">
+              <label for="handingDateInput">처리일자</label>
+              <input type="date"id="handingDateInput"><br/>
+            </div>
+          </form>
+            <div class="form-group">
+              <label for="customercompanyName">업체명</label>
+              <input type="text" class="form-control" id="customercompanyName" placeholder="Enter companyname">
+            </div>
+          <form class="form-inline form-group" role="form">
+            <div class="form-group">
+              <label for="customercompanyName">중분류</label>
+              <select class="form-control">
+                <option>중분류</option> <!--default-->
+                <option>요청</option>
+                <option>반품</option>
+              </select>
+            </div>
+              <!-- value change According to the classification -->
+            <div class="form-group">
+              <label for="customercompanyName">소분류</label>
+              <select class="form-control">
+                <option>소분류</option> <!--default-->
+                <option>단순요청</option>
+                <option>반품</option>
+              </select>
+            </div>
+          </form>
+            <div class="form-group">
+              <label for="noteInput">특이사항</label>
+              <textarea class="form-control" id="noteInput" rows="3"></textarea>
+            </div>
+            <div class="form-group">
+              <label for="occurrenceInput">발생상황</label>
+              <textarea class="form-control" id="occurrenceInput" rows="3"></textarea>
+            </div>
+            <div class="form-group">
+              <label for="interactionInput">응대내용</label>
+              <textarea class="form-control" id="interactionInput" rows="3"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>       
+        </div>
+      </div>
+    </div>
+
+    <div id="footer">
+      <div class="container">
+        <p>Back to <a href="../sticky-footer">the default sticky footer</a> minus the navbar.</p>
+        <p class="text-muted credit">Example courtesy <a href="http://martinbean.co.uk">Martin Bean</a> and <a href="http://ryanfait.com/sticky-footer/">Ryan Fait</a>.</p>
+      </div>
+    </div>
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="./js/jquery.js"></script>
+    <script src="./dist/js/bootstrap.min.js"></script>
+    <script src="./js/respond.js"></script>
+  </body>
+</html>
