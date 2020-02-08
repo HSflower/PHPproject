@@ -1,7 +1,7 @@
-# 영업운영 업무 프로세스 전산화(Internal communication management)
- 
+# 영업운영 업무 프로세스 전산화
+Internal communication management
 - develope to codeigniter
-- <buyrunicm.cafe24.com>(현재 호스팅 만료되어 사용 불가)
+- <http://buyrunicm.cafe24.com>(현재 호스팅 만료되어 사용 불가)
 
 ```
 ● 프로젝트 기간 : 2015.04.06 ~ 2015.05.28
